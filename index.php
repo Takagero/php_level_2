@@ -18,6 +18,22 @@ $db = new PDO('mysql:host=localhost;dbname=super_blog', 'root', ''); //excellent
 
 $registry->set ('db', $db);
 
-//В этом примере мы сначала создаём новый экземпляр библиотеки PDO и соединяемся с нашей БД MySQL. Потом делаем переменную $db доступной глобально при помощи нашего класса Registry.
+//В этом примере мы сначала создаём новый экземпляр библиотеки PDO и соединяемся с нашей БД MySQL. Потом делаем переменную $db доступной глобально при помощи класса Registry.
+
+# Загружаем объект Template
+$template = new Template($registry);
+$registry->set ('template', $template);
+
+$model = new Model($registry);
+$registry->set ('model', $model);
+
+# Загружаем router
+$router = new Router($registry);
+$registry->set ('router', $router);
+
+
+$router->setPath (site_path . 'controllers');
+
+$router->delegate();
 
 ?>
