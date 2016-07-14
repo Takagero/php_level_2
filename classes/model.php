@@ -42,19 +42,43 @@ Class Model {
 	
 	function getArticles(){
 		
-		$query = $this->registry['db']->query("SELECT * FROM article AS a
-		JOIN users AS u 
+		
+//		Достаем статьи а автора
+		$query = $this->registry['db']->query("SELECT *, u.login as users FROM article AS a
+		LEFT JOIN users u 
 		ON a.user_id = u.id 
 		ORDER BY a.id DESC 
 		");
 		
-		$articles = $query->fetchAll();
+//		$query = $this->registry['db']->query("SELECT * FROM super_blog.article sa 
+//		WHERE sa.user_id 
+//		IN (SELECT id FROM super_blog.users su WHERE su.id = sa.user_id)");
 		
-		if (empty($articles)) {
+		$query->setFetchMode(PDO::FETCH_ASSOC);
+		$results = $query->fetchAll();
+		
+		if (empty($results)) {
 			return false;
 		}
 		
-		return $articles;
+		return $results;
 	}
+	
+//	function getTags(){
+//		
+////		Достаем теги к статье
+//		$query2 = $this->registry['db']->query("SELECT name FROM tags AS t
+//		LEFT JOIN article_tags AS at 
+//		ON t.id = at.tag_id
+//		");
+//		$query2->setFetchMode(PDO::FETCH_ASSOC);
+//		$results[] = $query2->fetchALl();
+//		
+//		if (empty($results)) {
+//			return false;
+//		}
+//		
+//		return $results;
+//	}
 }
 ?>

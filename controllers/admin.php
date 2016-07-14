@@ -14,8 +14,9 @@ Class Controller_Admin Extends Controller_Base {
     		$data = array();
     		
     		$data['articles'] = $this->registry['model']->getArticles();
+//    		$data['tags'] = $this->registry['model']->getTags();
     		
-    		
+//    		var_dump($data);
     		$this->registry['template']->set('data', $data);
     		$this->registry['template']->set('user_data', $_SESSION);
 			$this->registry['template']->show('admin');
