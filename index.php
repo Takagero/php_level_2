@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-// session_start();
+session_start();
 header('Content-Type: text/html; charset=utf-8');
 
 define ('DIRSEP', DIRECTORY_SEPARATOR);
